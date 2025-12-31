@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../profile/profile_screen.dart';
 
 class AppColors {
   static const background = Color(0xff0B1220);
@@ -42,35 +43,49 @@ class BerandaScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          "DANDY CANDRA PRATAMA",
+                          "MOH. WAKID",
                           style: TextStyle(
                             color: AppColors.textWhite,
                             fontWeight: FontWeight.bold,
                           ),
+
+                          
                         ),
                       ],
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryBlueAccent,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Row(
-                      children: [
-                        Text(
-                          "MAHASISWA",
-                          style: TextStyle(
-                              color: AppColors.textWhite, fontSize: 12),
-                        ),
-                        SizedBox(width: 6),
-                        Icon(Icons.person,
-                            color: AppColors.textWhite, size: 18),
-                      ],
-                    ),
-                  )
+                  InkWell(
+  borderRadius: BorderRadius.circular(20),
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const ProfileScreen(),
+      ),
+    );
+  },
+  child: Container(
+    padding: const EdgeInsets.symmetric(
+        horizontal: 12, vertical: 6),
+    decoration: BoxDecoration(
+      color: AppColors.primaryBlueAccent,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: const Row(
+      children: [
+        Text(
+          "MAHASISWA",
+          style: TextStyle(
+              color: AppColors.textWhite, fontSize: 12),
+        ),
+        SizedBox(width: 6),
+        Icon(Icons.person,
+            color: AppColors.textWhite, size: 18),
+      ],
+    ),
+  ),
+),
+
                 ],
               ),
             ),
