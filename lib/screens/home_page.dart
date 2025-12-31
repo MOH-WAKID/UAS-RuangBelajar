@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'tabs/beranda_screen.dart';
-import 'tabs/kursus_screen.dart';
-import 'tabs/pesan_screen.dart';
-import 'tabs/profil_screen.dart';
+import 'tabs/home_screen.dart';
+import 'tabs/kelas_screen.dart';
+import 'tabs/notifikasi_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,9 +15,8 @@ class _HomePageState extends State<HomePage> {
 
   final pages = const [
     BerandaScreen(),
-    KursusScreen(),
-    PesanScreen(),
-    ProfilScreen(),
+    KelasScreen(),
+    NotifikasiScreen(),
   ];
 
   @override
@@ -41,10 +39,18 @@ class _HomePageState extends State<HomePage> {
           setState(() => currentIndex = index);
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Beranda"),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: "Kursus Saya"),
-          BottomNavigationBarItem(icon: Icon(Icons.message), label: "Pesan"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profil"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Beranda",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: "Kelas Saya",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: "Notifikasi",
+          ),
         ],
       ),
     );
