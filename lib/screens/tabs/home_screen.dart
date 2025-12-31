@@ -140,7 +140,7 @@ class BerandaScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text(
-                  "Pengumuman Terakhir",
+                  "Pengumuman",
                   style: TextStyle(
                       color: AppColors.textWhite,
                       fontSize: 18,
