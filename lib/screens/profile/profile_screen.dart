@@ -125,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _tabItem("About Me", 0),
+          _tabItem("Tentang Saya", 0),
           _tabItem("Kelas", 1),
           _tabItem("Edit Profile", 2),
         ],
