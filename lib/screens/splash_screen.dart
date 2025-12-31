@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -21,8 +22,11 @@ class _SplashScreenState extends State<SplashScreen> {
       });
 
       if (progress >= 100) {
-        progress = 100;
         timer.cancel();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => LoginScreen()),
+        );
       }
     });
   }
@@ -35,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Icon
             Container(
               width: 110,
               height: 110,
