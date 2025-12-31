@@ -1,127 +1,102 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-  final emailController = TextEditingController();
-  final passController = TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController username = TextEditingController();
+  final TextEditingController password = TextEditingController();
+
+  void login() {
+    if (username.text.isEmpty || password.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Username & Password tidak boleh kosong")),
+      );
+      return;
+    }
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => HomePage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff0B1220),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.all(25),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 60),
-
-            Container(
-              width: double.infinity,
-              height: 180,
-              decoration: BoxDecoration(
-                color: Colors.blueGrey[700],
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: const Center(
-                child: Text(
-                  "Ruang Belajar",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
             const Text(
-              "Selamat Datang\nKembali",
+              "Selamat Datang 👋",
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-
-            const SizedBox(height: 10),
-
+            const SizedBox(height: 5),
             const Text(
-              "Masuk untuk melanjutkan pembelajaran Anda hari ini.",
+              "Silahkan login untuk melanjutkan",
               style: TextStyle(color: Colors.grey),
             ),
 
-            const SizedBox(height: 25),
-
-            const Text("Email", style: TextStyle(color: Colors.white)),
-            const SizedBox(height: 8),
+            const SizedBox(height: 40),
 
             TextField(
-              controller: emailController,
+              controller: username,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
+                labelText: "Username",
+                labelStyle: const TextStyle(color: Colors.white70),
                 filled: true,
                 fillColor: Colors.white10,
-                prefixIcon: const Icon(Icons.email, color: Colors.white),
-                hintText: "nama@sekolah.id",
-                hintStyle: const TextStyle(color: Colors.grey),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ),
 
             const SizedBox(height: 20),
 
-            const Text("Kata Sandi", style: TextStyle(color: Colors.white)),
-            const SizedBox(height: 8),
-
             TextField(
+              controller: password,
               obscureText: true,
-              controller: passController,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
+                labelText: "Password",
+                labelStyle: const TextStyle(color: Colors.white70),
                 filled: true,
                 fillColor: Colors.white10,
-                prefixIcon: const Icon(Icons.lock, color: Colors.white),
-                suffixIcon: const Icon(Icons.visibility, color: Colors.white),
-                hintText: "Masukkan kata sandi",
-                hintStyle: const TextStyle(color: Colors.grey),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 35),
 
             SizedBox(
               width: double.infinity,
-              height: 55,
+              height: 50,
               child: ElevatedButton(
+                onPressed: login,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
+                      borderRadius: BorderRadius.circular(12)),
                 ),
-                onPressed: () {},
                 child: const Text(
-                  "Masuk  →",
+                  "Login",
                   style: TextStyle(fontSize: 18),
                 ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            Center(
-              child: Text(
-                "Butuh Bantuan?",
-                style: TextStyle(color: Colors.blue[300]),
               ),
             )
           ],
