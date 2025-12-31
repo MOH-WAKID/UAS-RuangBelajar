@@ -21,6 +21,39 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
+  void showHelpDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xff0B1220),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          title: const Text(
+            "Pusat Bantuan",
+            style: TextStyle(color: Colors.white),
+          ),
+          content: const Text(
+            "Jika mengalami masalah login:\n\n"
+            "• Pastikan email benar\n"
+            "• Pastikan kata sandi benar\n"
+            "• Periksa koneksi internet\n\n"
+            "Jika tetap tidak bisa, hubungi admin aplikasi.",
+            style: TextStyle(color: Colors.white70),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                "Tutup",
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,9 +180,16 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             Center(
-              child: Text(
-                "Butuh Bantuan?",
-                style: TextStyle(color: Colors.blue[300]),
+              child: GestureDetector(
+                onTap: () => showHelpDialog(context),
+                child: Text(
+                  "Butuh Bantuan?",
+                  style: TextStyle(
+                    color: Colors.blue[300],
+                    fontSize: 14,        // lebih kecil
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
               ),
             ),
           ],
