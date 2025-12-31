@@ -186,7 +186,7 @@ class LoginScreen extends StatelessWidget {
                   "Butuh Bantuan?",
                   style: TextStyle(
                     color: Colors.blue[300],
-                    fontSize: 14,        // lebih kecil
+                    fontSize: 14,       
                     decoration: TextDecoration.underline,
                   ),
                 ),
