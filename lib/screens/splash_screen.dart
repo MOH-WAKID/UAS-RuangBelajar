@@ -79,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "LOADING RESOURCES",
+                      "SEDANG MEMUAT",
                       style: TextStyle(
                         color: Colors.blue[300],
                         letterSpacing: 2,

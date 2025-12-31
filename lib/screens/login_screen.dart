@@ -36,16 +36,28 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               height: 180,
               decoration: BoxDecoration(
-                color: Colors.blueGrey[700],
                 borderRadius: BorderRadius.circular(25),
+                image: const DecorationImage(
+                  image: NetworkImage(
+                    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80",
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
-              child: const Center(
-                child: Text(
-                  "Ruang Belajar",
-                  style: TextStyle(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.35),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: const Center(
+                  child: Text(
+                    "Ruang Belajar",
+                    style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -53,11 +65,12 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 30),
 
             const Text(
-              "Selamat Datang\nKembali",
+              "Selamat Datang\nKembali 👋",
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             ),
 
             const SizedBox(height: 10),
@@ -94,15 +107,14 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 8),
 
             TextField(
-              obscureText: true,
               controller: passController,
+              obscureText: true,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white10,
                 prefixIcon: const Icon(Icons.lock, color: Colors.white),
-                suffixIcon:
-                    const Icon(Icons.visibility, color: Colors.white),
+                suffixIcon: const Icon(Icons.visibility, color: Colors.white),
                 hintText: "Masukkan kata sandi",
                 hintStyle: const TextStyle(color: Colors.grey),
                 border: OutlineInputBorder(
@@ -139,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                 "Butuh Bantuan?",
                 style: TextStyle(color: Colors.blue[300]),
               ),
-            )
+            ),
           ],
         ),
       ),
