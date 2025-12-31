@@ -21,178 +21,208 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void showHelpDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: const Color(0xff0B1220),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-          title: const Text(
-            "Pusat Bantuan",
-            style: TextStyle(color: Colors.white),
-          ),
-          content: const Text(
-            "Jika mengalami masalah login:\n\n"
-            "• Pastikan email benar\n"
-            "• Pastikan kata sandi benar\n"
-            "• Periksa koneksi internet\n\n"
-            "Jika tetap tidak bisa, hubungi admin aplikasi.",
-            style: TextStyle(color: Colors.white70),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text(
-                "Tutup",
-                style: TextStyle(color: Colors.blue),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff0B1220),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(25),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 60),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30),
 
-            Container(
-              width: double.infinity,
-              height: 180,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                image: const DecorationImage(
-                  image: NetworkImage(
-                    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80",
+              // ================= CARD IMAGE =================
+              Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(28),
+                  image: const DecorationImage(
+                    image: NetworkImage(
+                      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+                    ),
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(28),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withOpacity(0.2),
+                        Colors.black.withOpacity(0.6),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: const [
+                      Icon(Icons.school, color: Colors.white, size: 26),
+                      SizedBox(width: 10),
+                      Text(
+                        "Ruang Belajar",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.35),
-                  borderRadius: BorderRadius.circular(25),
+
+              const SizedBox(height: 30),
+
+              // ================= TITLE =================
+              const Text(
+                "Selamat Datang\nKembali",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  height: 1.2,
                 ),
-                child: const Center(
+              ),
+
+              const SizedBox(height: 12),
+
+              const Text(
+                "Masuk untuk melanjutkan pembelajaran\nAnda hari ini.",
+                style: TextStyle(
+                  color: Colors.white60,
+                  fontSize: 15,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              // ================= EMAIL =================
+              const Text("Email", style: TextStyle(color: Colors.white70)),
+              const SizedBox(height: 8),
+
+              _inputField(
+                controller: emailController,
+                hint: "nama@sekolah.id",
+                icon: Icons.email,
+              ),
+
+              const SizedBox(height: 20),
+
+              // ================= PASSWORD =================
+              const Text("Kata Sandi", style: TextStyle(color: Colors.white70)),
+              const SizedBox(height: 8),
+
+              _inputField(
+                controller: passController,
+                hint: "Masukkan kata sandi",
+                icon: Icons.lock,
+                obscure: true,
+              ),
+
+              const SizedBox(height: 30),
+
+              // ================= BUTTON =================
+              SizedBox(
+                width: double.infinity,
+                height: 56,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    elevation: 6,
+                  ),
+                  onPressed: () => login(context),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Masuk",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Icon(Icons.arrow_forward),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // ================= HELP (BISA DIKLIK) =================
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: const Text("Butuh Bantuan?"),
+                        content: const Text(
+                          "Jika Anda lupa email atau kata sandi,\n"
+                          "silakan hubungi admin.\n\n"
+                          "📧 Email: admin@ruangbelajar.id\n"
+                          "📱 WhatsApp: 0812-3456-7891",
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text("Tutup"),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                   child: Text(
-                    "Ruang Belajar",
+                    "Butuh Bantuan?",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[300],
+                      fontSize: 14,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 ),
               ),
-            ),
 
-            const SizedBox(height: 30),
+              const SizedBox(height: 30),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-            const Text(
-              "Selamat Datang\nKembali 👋",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            const Text(
-              "Masuk untuk melanjutkan pembelajaran Anda hari ini.",
-              style: TextStyle(color: Colors.grey),
-            ),
-
-            const SizedBox(height: 25),
-
-            const Text("Email", style: TextStyle(color: Colors.white)),
-            const SizedBox(height: 8),
-
-            TextField(
-              controller: emailController,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white10,
-                prefixIcon: const Icon(Icons.email, color: Colors.white),
-                hintText: "nama@sekolah.id",
-                hintStyle: const TextStyle(color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            const Text("Kata Sandi", style: TextStyle(color: Colors.white)),
-            const SizedBox(height: 8),
-
-            TextField(
-              controller: passController,
-              obscureText: true,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white10,
-                prefixIcon: const Icon(Icons.lock, color: Colors.white),
-                suffixIcon: const Icon(Icons.visibility, color: Colors.white),
-                hintText: "Masukkan kata sandi",
-                hintStyle: const TextStyle(color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                onPressed: () => login(context),
-                child: const Text(
-                  "Masuk  →",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            Center(
-              child: GestureDetector(
-                onTap: () => showHelpDialog(context),
-                child: Text(
-                  "Butuh Bantuan?",
-                  style: TextStyle(
-                    color: Colors.blue[300],
-                    fontSize: 14,       
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ),
-          ],
+  // ================= INPUT FIELD =================
+  Widget _inputField({
+    required TextEditingController controller,
+    required String hint,
+    required IconData icon,
+    bool obscure = false,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white10,
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: obscure,
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.white38),
+          prefixIcon: Icon(icon, color: Colors.white70),
+          contentPadding: const EdgeInsets.symmetric(vertical: 18),
         ),
       ),
     );
